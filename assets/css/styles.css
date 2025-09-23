@@ -52,44 +52,44 @@ a:focus {
 }
 
 .site-header {
-  background: rgba(11, 19, 29, 0.94);
+  background: rgba(11, 19, 29, 0.96);
   border-bottom: 1px solid var(--color-border);
   backdrop-filter: blur(14px);
   position: sticky;
   top: 0;
   z-index: 120;
+  padding: 18px 0;
   transition: transform 0.35s ease, padding 0.35s ease;
   will-change: transform;
 }
 
 .header__row {
-  display: grid;
-  grid-template-columns: auto 1fr;
+  display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
-  padding: 20px 0;
+  gap: 24px;
 }
 
 .header__logo-group {
   display: flex;
   align-items: center;
   gap: 16px;
+  min-width: 0;
 }
 
 .site-logo {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  line-height: 0;
 }
 
 .site-logo picture {
   display: block;
-  line-height: 0;
 }
 
 .site-logo img {
-  width: 120px;
+  width: 132px;
   height: auto;
 }
 
@@ -97,12 +97,14 @@ a:focus {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  min-width: 0;
 }
 
 .header__title {
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 1.28rem;
   font-weight: 700;
+  line-height: 1.15;
 }
 
 .header__subtitle {
@@ -114,13 +116,9 @@ a:focus {
 .header__cta {
   display: flex;
   flex-direction: column;
-  gap: 10px;
   align-items: flex-end;
+  gap: 12px;
   text-align: right;
-}
-
-.header__cta > .header__subtitle {
-  font-size: 0.82rem;
 }
 
 .header__links {
@@ -139,42 +137,48 @@ a:focus {
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid transparent;
   font-weight: 600;
-  font-size: 0.92rem;
-  transition: var(--transition);
+  font-size: 0.94rem;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
 }
 
-.contact-link:hover,
+.contact-link:focus,
 .contact-link:focus-visible {
-  border-color: rgba(255, 255, 255, 0.25);
-  background: rgba(255, 180, 0, 0.18);
+  outline: none;
+  border-color: rgba(255, 180, 0, 0.35);
+  box-shadow: 0 0 0 2px rgba(255, 180, 0, 0.25);
 }
 
-@media (max-width: 640px) {
-  .header__row {
-    grid-template-columns: 1fr;
-    justify-items: center;
-    text-align: center;
-    gap: 16px;
+.contact-link:active {
+  transform: translateY(1px);
+}
+
+@media (max-width: 768px) {
+  .site-header {
     padding: 16px 0;
+  }
+
+  .header__row {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 18px;
   }
 
   .header__logo-group {
     flex-direction: column;
-    gap: 12px;
   }
 
   .site-logo img {
-    width: 100px;
+    width: 112px;
   }
 
-  .site-header--compact .site-logo img {
-    width: 84px;
+  .header__heading {
+    align-items: center;
   }
 
   .header__cta {
     align-items: center;
     text-align: center;
-    gap: 8px;
   }
 
   .header__links {
@@ -182,9 +186,13 @@ a:focus {
   }
 }
 
-@media (min-width: 768px) {
-  .header__row {
-    grid-template-columns: auto 1fr auto;
+@media (min-width: 1024px) {
+  .header__title {
+    font-size: 1.36rem;
+  }
+
+  .header__subtitle {
+    font-size: 0.92rem;
   }
 
   .site-logo img {
@@ -192,22 +200,13 @@ a:focus {
   }
 }
 
-@media (min-width: 960px) {
-  .header__row {
-    padding: 18px 0;
-  }
-
-  .site-logo img {
-    width: 156px;
-  }
-}
-
 .site-header--compact {
-  padding-top: 0;
+  padding-top: 6px;
+  padding-bottom: 10px;
 }
 
 .site-header--compact .header__row {
-  padding: 12px 0;
+  gap: 18px;
 }
 
 .site-header--compact .site-logo img {
@@ -215,12 +214,15 @@ a:focus {
 }
 
 .site-header--compact .header__title {
-  font-size: 1.05rem;
+  font-size: 1.12rem;
 }
 
-.site-header--compact .header__subtitle,
-.site-header--compact .header__cta > .header__subtitle {
-  font-size: 0.8rem;
+.site-header--compact .header__subtitle {
+  font-size: 0.82rem;
+}
+
+.site-header--compact .header__cta {
+  gap: 8px;
 }
 
 .site-header--hidden {
@@ -228,16 +230,12 @@ a:focus {
 }
 
 @media (hover: none) {
-  .contact-link:focus {
-    background: rgba(255, 255, 255, 0.08);
+  .contact-link:focus,
+  .contact-link:focus-visible {
+    box-shadow: none;
     border-color: transparent;
   }
-
-  .sticky-cta__link:focus {
-    color: #181818;
-  }
 }
-
 
 
 .hero {
