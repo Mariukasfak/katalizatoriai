@@ -707,8 +707,29 @@ small {
 
 .footer__contact {
   display: grid;
-  gap: 8px;
+  gap: 12px;
+  align-content: start;
+}
+
+.footer__details {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+  color: var(--color-text-muted);
+  font-size: 0.94rem;
+}
+
+.footer__detail-link {
+  color: var(--color-text);
   font-weight: 600;
+}
+
+.footer__detail-link:hover,
+.footer__detail-link:focus,
+.footer__detail-link:focus-visible {
+  color: var(--color-accent);
 }
 
 .footer__partners {
