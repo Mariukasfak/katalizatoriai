@@ -491,11 +491,15 @@
       const TAWK_SRC = 'https://embed.tawk.to/68d2a63a689fd01926387f8a/1j5rdilgu';
       let injected = false;
 
-      const hideAttention = () => {
+      const brandAttention = () => {
         const attention = document.querySelector('#tawk-bubble-container img[src*="attention-grabbers"]');
-        if (attention) {
-          attention.style.display = 'none';
-        }
+        if (!attention) return;
+        if (attention.dataset.tawkCustom === 'brand') return;
+        attention.src = 'assets/img/logotipas.png';
+        attention.srcset = '';
+        attention.alt = 'Katalizatorių Supirkimas LT pokalbis';
+        attention.dataset.tawkCustom = 'brand';
+        attention.referrerPolicy = 'no-referrer';
       };
 
       const chain = (original, next) => function() {
@@ -507,11 +511,11 @@
         }
       };
 
-  window.Tawk_API = window.Tawk_API || {};
-  window.Tawk_API.onLoad = chain(window.Tawk_API.onLoad, hideAttention);
-  window.Tawk_API.onChatMaximized = chain(window.Tawk_API.onChatMaximized, hideAttention);
-  window.Tawk_API.onChatMinimized = chain(window.Tawk_API.onChatMinimized, hideAttention);
-  window.Tawk_API.onChatEnded = chain(window.Tawk_API.onChatEnded, hideAttention);
+    window.Tawk_API = window.Tawk_API || {};
+    window.Tawk_API.onLoad = chain(window.Tawk_API.onLoad, brandAttention);
+    window.Tawk_API.onChatMaximized = chain(window.Tawk_API.onChatMaximized, brandAttention);
+    window.Tawk_API.onChatMinimized = chain(window.Tawk_API.onChatMinimized, brandAttention);
+    window.Tawk_API.onChatEnded = chain(window.Tawk_API.onChatEnded, brandAttention);
 
       const injectTawk = () => {
         if (injected) return;
@@ -530,7 +534,8 @@
         setTimeout(injectTawk, 3000);
         const eager = () => {
           injectTawk();
-          hideAttention();
+          brandAttention();
+          setTimeout(brandAttention, 800);
           window.removeEventListener('scroll', eager);
           window.removeEventListener('mousemove', eager);
           window.removeEventListener('touchstart', eager);
@@ -542,8 +547,10 @@
 
       if (document.readyState === 'complete') {
         setupDeferredLoad();
+        brandAttention();
       } else {
         window.addEventListener('load', setupDeferredLoad, { once: true });
+        window.addEventListener('load', () => setTimeout(brandAttention, 800), { once: true });
       }
     })();
   </script>

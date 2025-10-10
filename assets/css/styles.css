@@ -933,8 +933,15 @@ small {
   color: var(--color-accent);
 }
 
-#tawk-bubble-container img[src*="attention-grabbers"] {
-  display: none !important;
+#tawk-bubble-container img[data-tawk-custom="brand"] {
+  width: 128px !important;
+  height: auto !important;
+  max-width: none !important;
+  object-fit: contain !important;
+  border-radius: var(--radius-sm);
+  background: rgba(11, 19, 29, 0.94);
+  padding: 6px 12px;
+  box-shadow: 0 18px 34px -20px rgba(0, 0, 0, 0.65);
 }
 
 .sticky-cta {
