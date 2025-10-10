@@ -456,14 +456,6 @@
     </div>
   </footer>
 
-  <button class="chat-nudge" type="button" aria-label="Lengviausia susisiekti pokalbiu">
-    <span class="chat-nudge__emoji" aria-hidden="true">💬</span>
-    <span class="chat-nudge__text">
-      <span class="chat-nudge__headline">Lengviausia susisiekti čia</span>
-      <span class="chat-nudge__subline">Greita kaina per pokalbį</span>
-    </span>
-  </button>
-
   <div class="sticky-cta" aria-label="Mobilus kvietimas veiksmui">
     <a class="sticky-cta__link" href="tel:+37063655055">Skambinti ir gauti kainą</a>
   </div>
@@ -496,30 +488,8 @@
   </script>
   <script>
     (function() {
-      const chatNudge = document.querySelector('.chat-nudge');
-      if (!chatNudge) return;
-
-      const openChat = () => {
-        if (window.Tawk_API && typeof window.Tawk_API.maximize === 'function') {
-          window.Tawk_API.maximize();
-        } else {
-          const contactLink = document.querySelector('.contact-link[href^="tel:"]');
-          if (contactLink) {
-            contactLink.click();
-          }
-        }
-      };
-
-      chatNudge.addEventListener('click', openChat);
-      chatNudge.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter' || event.key === ' ') {
-          event.preventDefault();
-          openChat();
-        }
-      });
-
-      const hideNudge = () => chatNudge.classList.add('chat-nudge--hidden');
-      const showNudge = () => chatNudge.classList.remove('chat-nudge--hidden');
+      const TAWK_SRC = 'https://embed.tawk.to/68d2a63a689fd01926387f8a/1j5rdilgu';
+      let injected = false;
 
       const hideAttention = () => {
         const attention = document.querySelector('#tawk-bubble-container img[src*="attention-grabbers"]');
@@ -537,25 +507,11 @@
         }
       };
 
-      window.Tawk_API = window.Tawk_API || {};
-      window.Tawk_API.onLoad = chain(window.Tawk_API.onLoad, () => {
-        showNudge();
-      });
-      window.Tawk_API.onLoad = chain(window.Tawk_API.onLoad, hideAttention);
-      window.Tawk_API.onChatMaximized = chain(window.Tawk_API.onChatMaximized, hideNudge);
-      window.Tawk_API.onChatMinimized = chain(window.Tawk_API.onChatMinimized, showNudge);
-      window.Tawk_API.onChatEnded = chain(window.Tawk_API.onChatEnded, showNudge);
-
-      if (window.Tawk_API && typeof window.Tawk_API.isChatMaximized === 'function' && window.Tawk_API.isChatMaximized()) {
-        hideNudge();
-        hideAttention();
-      }
-    })();
-  </script>
-  <script>
-    (function() {
-      const TAWK_SRC = 'https://embed.tawk.to/68d2a63a689fd01926387f8a/1j5rdilgu';
-      let injected = false;
+  window.Tawk_API = window.Tawk_API || {};
+  window.Tawk_API.onLoad = chain(window.Tawk_API.onLoad, hideAttention);
+  window.Tawk_API.onChatMaximized = chain(window.Tawk_API.onChatMaximized, hideAttention);
+  window.Tawk_API.onChatMinimized = chain(window.Tawk_API.onChatMinimized, hideAttention);
+  window.Tawk_API.onChatEnded = chain(window.Tawk_API.onChatEnded, hideAttention);
 
       const injectTawk = () => {
         if (injected) return;
