@@ -944,6 +944,72 @@ small {
   box-shadow: 0 18px 34px -20px rgba(0, 0, 0, 0.65);
 }
 
+.floating-contact {
+  position: fixed;
+  right: 24px;
+  bottom: 110px;
+  z-index: 120;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.floating-contact__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  line-height: 1;
+}
+
+.floating-contact__btn:hover,
+.floating-contact__btn:focus {
+  transform: scale(1.1);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+}
+
+.floating-contact__btn:active {
+  transform: scale(0.95);
+}
+
+.floating-contact__btn--phone {
+  background: linear-gradient(135deg, var(--color-accent), #ffd166);
+  color: #151515;
+  font-weight: 700;
+}
+
+.floating-contact__btn--whatsapp {
+  background: rgba(37, 211, 102, 0.88);
+  color: white;
+}
+
+.floating-contact__btn--viber {
+  background: rgba(118, 45, 160, 0.88);
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .floating-contact {
+    right: 16px;
+    bottom: 85px;
+    gap: 10px;
+  }
+
+  .floating-contact__btn {
+    width: 48px;
+    height: 48px;
+    font-size: 1.3rem;
+  }
+}
+
+
 .sticky-cta {
   position: fixed;
   left: 0;
