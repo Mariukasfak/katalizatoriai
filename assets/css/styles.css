@@ -150,6 +150,14 @@ a:focus {
   transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
 }
 
+.contact-link__icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: inherit;
+  filter: brightness(0) saturate(100%) invert(1);
+}
+
 .contact-link:focus,
 .contact-link:focus-visible {
   outline: none;
@@ -961,12 +969,17 @@ small {
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  font-size: 1.5rem;
   cursor: pointer;
   border: none;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   line-height: 1;
+}
+
+.floating-contact__btn img {
+  width: 24px;
+  height: 24px;
+  filter: brightness(0) saturate(100%) invert(1);
 }
 
 .floating-contact__btn:hover,
@@ -981,18 +994,14 @@ small {
 
 .floating-contact__btn--phone {
   background: linear-gradient(135deg, var(--color-accent), #ffd166);
-  color: #151515;
-  font-weight: 700;
 }
 
 .floating-contact__btn--whatsapp {
   background: rgba(37, 211, 102, 0.88);
-  color: white;
 }
 
 .floating-contact__btn--viber {
   background: rgba(118, 45, 160, 0.88);
-  color: white;
 }
 
 @media (max-width: 768px) {
