@@ -53,10 +53,6 @@
             <span aria-hidden="true" class="icon">📞</span>
             <span>+370 636 55055</span>
           </a>
-          <a class="contact-link" href="viber://chat?number=%2B37063655055">
-            <span aria-hidden="true" class="icon">💬</span>
-            <span>Viber</span>
-          </a>
           <a class="contact-link" href="https://wa.me/37063655055" target="_blank" rel="noopener">
             <span aria-hidden="true" class="icon">🟢</span>
             <span>WhatsApp</span>
@@ -104,18 +100,18 @@
             <div class="price-ticker__cards">
               <div class="ticker-card">
                 <span class="ticker-label">Keramikinis katalizatorius</span>
-                <span class="ticker-value">160–520 €</span>
+                <span class="ticker-value">Priklausomai nuo tipo</span>
               </div>
               <div class="ticker-card">
                 <span class="ticker-label">Dyzelinis DPF filtras</span>
-                <span class="ticker-value">60–280 €</span>
+                <span class="ticker-value">Priklausomai nuo tipo</span>
               </div>
               <div class="ticker-card">
                 <span class="ticker-label">Sunkvežimio ar sport katalizatorius</span>
-                <span class="ticker-value">260–950 €</span>
+                <span class="ticker-value">Priklausomai nuo tipo</span>
               </div>
             </div>
-            <small>* Vertės gali būti mažesnės, jei katalizatorius išvalytas ar nėra tauriųjų metalų likučio.</small>
+            <small>* Vertės priklauso nuo tauriųjų metalų likučio ir aktualių biržų kursų. Tikslią kainą sužinosite po pokalbio.</small>
           </div>
         </div>
       </div>
@@ -180,27 +176,27 @@
           </div>
           <div class="pricing-row" role="row">
             <div class="pricing-cell" role="cell">Automobilio katalizatorius su kodu</div>
-            <div class="pricing-cell" role="cell">160–520 €</div>
-            <div class="pricing-cell" role="cell">Tiksliausia kaina, kai pateikiamas kodas arba nuotrauka su žymėjimu.</div>
+            <div class="pricing-cell" role="cell">Priklausomai nuo kodo</div>
+            <div class="pricing-cell" role="cell">Tiksliausia kaina, kai pateikiamas kodas arba nuotrauka su žymėjimu. Skambinkite arba rašykite.</div>
           </div>
           <div class="pricing-row" role="row">
             <div class="pricing-cell" role="cell">Dyzelinis DPF filtras</div>
-            <div class="pricing-cell" role="cell">60–280 €</div>
+            <div class="pricing-cell" role="cell">Priklausomai nuo tipo</div>
             <div class="pricing-cell" role="cell">Priklauso nuo metalo likučio ir filtro būklės. Atliekame XRF analizę vietoje.</div>
           </div>
           <div class="pricing-row" role="row">
             <div class="pricing-cell" role="cell">Pažeistas ar be kodo</div>
-            <div class="pricing-cell" role="cell">40–220 €</div>
+            <div class="pricing-cell" role="cell">Pagal XRF analizę</div>
             <div class="pricing-cell" role="cell">Po nemokamos XRF analizės pasiūlome kainą be tarpininkų maržos.</div>
           </div>
           <div class="pricing-row" role="row">
             <div class="pricing-cell" role="cell">Regeneruotas ar tuščias DPF</div>
-            <div class="pricing-cell" role="cell">0–60 €</div>
+            <div class="pricing-cell" role="cell">Nemokamai sutvarkom</div>
             <div class="pricing-cell" role="cell">Jei aktyvus sluoksnis pašalintas, pasiūlysime nemokamą utilizavimą ir išdavimo aktą.</div>
           </div>
         </div>
         <div class="pricing-note">
-          <p>Nuolat sekame tauriųjų metalų rinką ir mūsų partnerių užsakymus, todėl kainų pasiūlymus peržiūrime kiekvieną dieną. Galutinė vertė priklauso nuo realaus metalo likučio – kartais ji siekia nulį, todėl orientacines ribas naudojame tik pradiniam pokalbiui.</p>
+          <p>Kainodarą sudėtina tai, kad tauriųjų metalų kainos biržose svyruoja, o katalizatorių sudėtis skiriasi. Todėl dėl tikslios kainos skambinkite arba rašykite – pateiksime pasiūlymą per kelias minutes.</p>
         </div>
       </div>
     </section>
@@ -286,7 +282,7 @@
           </details>
           <details>
             <summary>Kokia minimali ir maksimali kaina?</summary>
-            <p>Kainas lemia kodas, dangų sudėtis ir metalo kursai. Paprasti katalizatoriai prasideda nuo 90 €, o dideli OEM katalizatoriai gali viršyti 1200 €.</p>
+            <p>Kainas lemia kodas, dangų sudėtis ir metalo kursai. Konkretę kainą pateiksime per telefoną – kiekvienas katalizatorius yra individualus!</p>
           </details>
           <details>
             <summary>Ar reikia išimti keramiką iš bakelio?</summary>
@@ -457,7 +453,11 @@
   </footer>
 
   <div class="sticky-cta" aria-label="Mobilus kvietimas veiksmui">
-    <a class="sticky-cta__link" href="tel:+37063655055">Skambinti ir gauti kainą</a>
+    <div class="sticky-cta__buttons">
+      <a class="sticky-cta__link sticky-cta__link--primary" href="tel:+37063655055">📞 Skambinti</a>
+      <a class="sticky-cta__link sticky-cta__link--secondary" href="viber://contact?number=%2B37063655055" target="_blank" rel="noopener">💬 Viber</a>
+      <a class="sticky-cta__link sticky-cta__link--secondary" href="https://wa.me/37063655055" target="_blank" rel="noopener">🟢 WhatsApp</a>
+    </div>
   </div>
 
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
@@ -636,7 +636,7 @@
         "name": "Kokia minimali ir maksimali kaina?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Kainos prasideda nuo 90 € ir gali viršyti 1200 €, priklausomai nuo katalizatoriaus tipo, dangų sudėties bei biržos pokyčių."
+          "text": "Kainodarą sudėtina dažnos tauriųjų metalų kainų oscilijacijos ir skirtingos katalizatorių sudėtis. Konkrečią kainą pateikiame per pokalbį."
         }
       },
       {
