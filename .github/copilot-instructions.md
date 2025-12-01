@@ -1,40 +1,258 @@
-# Copilot instructions for `katalizatoriai`
+# Copilot Instructions – Katalizatoriai Website
 
-### Project snapshot
-- Static Lithuanian landing page for catalytic converter buyback. No build system—everything lives in `index.html`, `assets/css/styles.css`, and the small `/assets/img` set.
-- Keep copy in Lithuanian unless the request explicitly says otherwise; headings, ARIA labels, and metadata are tuned for local SEO.
+## Project Overview
 
-### Architecture & content flow
-- `index.html` is the single entry point. Major sections are ordered hero → benefits → process → pricing → service-quality → locations → testimonials → FAQ → CTA. Additions should follow this narrative and reuse existing section classes.
-- Reusable utility/shared classes (e.g., `.container`, `.section`, `.btn`) already handle layout and typography—prefer extending them instead of redefining layout rules inline.
-- Section markup follows an accessible pattern: semantic headings, `aria-labelledby`, and descriptive list/figure elements. Preserve this structure when editing or creating new blocks.
+**Katalizatoriai** is a single-page, static marketing website for a Lithuanian catalytic converter and DPF filter buying service. The site uses semantic HTML, a dark-theme design system with gold accents, and responsive layouts optimized for mobile-first viewing.
 
-### Styling patterns
-- Global theme variables live at the top of `assets/css/styles.css`; reuse or extend those tokens (`--color-*`, `--radius-*`, `--shadow-*`) for visual consistency.
-- Class naming is BEM-influenced (`hero__content`, `section-benefits`). Stick to that scheme and co-locate new styles near related blocks in the CSS file.
-- Responsive tweaks use `@media (max-width: 768px)` and `@media (min-width: 1024px)` breakpoints. When adding components, mirror these breakpoints.
+- **Language**: Lithuanian (lang="lt")
+- **Tech Stack**: Vanilla HTML, CSS Grid/Flexbox, vanilla JavaScript
+- **Key Files**: `index.html` (main page), `assets/css/styles.css`, `assets/img/` (graphics)
+- **Hosting**: Static file delivery (no backend)
 
-### JavaScript & embeds
-- The page relies on two third-party scripts: Google Analytics (`gtag.js`) and Tawk.to chat. Do not remove or rename their script tags without explicit instruction.
-- Custom JS is inline at the bottom of `index.html` and currently only manages header scroll states and footer year. New behavior should be wrapped in an IIFE and be defensive against missing DOM nodes.
+## Architecture & Components
 
-### SEO & structured data
-- Critical meta tags (canonical, OG, Twitter) plus two JSON-LD blocks (`LocalBusiness`, `FAQPage`) live in `index.html`. If you change contact info or FAQ content, update both the visible copy and the corresponding JSON-LD entries.
-- `robots.txt` and `sitemap.xml` are manually curated. When publishing new pages, add URLs to `sitemap.xml` and keep the `Sitemap` directive accurate.
+### Page Structure (Semantic Sections)
 
-### Assets & media
-- Logos exist as both PNG and WebP; serve WebP inside `<picture>` with PNG fallback. Provide matching resolutions when adding new imagery to maintain performance.
-- Optimize new images for dark backgrounds and keep alt text descriptive (Lithuanian preferred).
+1. **Header (`<header class="site-header">`)** – Sticky, responsive navigation bar
+   - Logo with picture element (WebP fallback)
+   - Company branding and contact links (phone, WhatsApp, Viber)
+   - Compact mode triggered at 120px scroll, hidden at 200px scroll
 
-### Local workflows
-- No package manager is required. Preview locally with any static server, for example:
-  ```bash
-  cd /workspaces/katalizatoriai && python3 -m http.server 8000
-  ```
-- Before delivery, manually scan in-browser for responsive breakpoints (mobile ≤768px, desktop ≥1024px) and verify sticky header, sticky CTA, and chat widget still behave as expected.
+2. **Hero Section (`#hero`)** – Main call-to-action
+   - Responsive grid: 2 columns on desktop, 1 column on mobile
+   - Left: Headline, badge, CTAs, bullets, trust metrics
+   - Right: Price ticker (hidden on mobile, display: none at breakpoint)
+   - Background: Dual radial gradients for depth
 
-### Key files to know
-- `index.html` – main page structure, metadata, inline scripts.
-- `assets/css/styles.css` – global theme tokens, layout, responsive rules.
-- `assets/img/` – logo assets used in `<picture>` elements.
-- `sitemap.xml`, `robots.txt` – SEO configuration you must keep in sync with content.
+3. **Benefits Section (`#benefits`)** – 4 cards in grid
+   - Desktop: 4 columns; Mobile: 1 column
+   - Key messaging on service quality
+
+4. **Process Section (`#process`)** – 3-step numbered flow
+   - Desktop: 3 columns; Mobile: 1 column
+   - Step numbers positioned absolutely on mobile, static on desktop
+
+5. **Pricing Section (`#pricing`)** – Pricing table + FAQ note
+   - Table: Single column on mobile, 3 columns (1.2fr 0.8fr 1.2fr) on desktop
+   - Responsive font sizing and padding
+
+6. **Design/Service Quality (`#service-quality`)** – 4 feature cards
+   - Desktop: 4 columns; Mobile: 1 column
+   - Cards with accent gradient overlay
+
+7. **Locations (`#locations`)** – City list for service coverage
+   - Desktop: 5 columns; Mobile: 1 column; Tablet: 2 columns
+
+8. **Testimonials (`#testimonials`)** – Client quotes
+   - Desktop: 3 columns; Mobile: 1 column
+
+9. **FAQ (`#faq`)** – Collapsible details/summary elements
+   - SEO-optimized with structured data
+
+10. **Guide (`#gidas`)** – 3 detailed articles with tables
+    - Responsive table with horizontal scroll on mobile
+    - Articles: padding 24px on mobile → 32px on desktop
+
+11. **CTA Section (`#cta`)** – Final call-to-action
+
+12. **Footer** – Contact info, partners, links
+
+### Fixed UI Elements
+
+- **Sticky CTA Bar** (`.sticky-cta`) – Visible only on mobile (<640px), bottom of viewport
+  - 3 links: Call, WhatsApp, Viber
+  - Disappears on desktop (display: none @640px+)
+  - Min-height: 60px to prevent overlap with floating buttons
+
+- **Floating Contact Buttons** (`.floating-contact`)
+  - Positioned: fixed right 16px, bottom calc(80px + 16px) on mobile
+  - Desktop: bottom 24px, gap 12px
+  - 3 icon buttons with gradient backgrounds
+
+## Responsive Design Breakpoints
+
+```css
+Mobile-first defaults: 1 column, padding 12px, smaller fonts
+@media (min-width: 640px): 2–4 columns, padding 14–30px, increased fonts
+@media (min-width: 960px): 4 columns, enhanced spacing
+```
+
+### Key Mobile Fixes (Applied)
+
+- Button sizes: 12px 24px on mobile → 14px 30px on desktop
+- Section padding: 60px on mobile → 80px on desktop
+- Header padding: 12px on mobile → 18px on desktop
+- Font sizes use `clamp()` for smooth scaling
+- Images: `loading="lazy"`, `decoding="async"`
+- No horizontal scroll; overflow-x: hidden on body
+
+## CSS Design System
+
+### Color Variables (Dark Theme)
+
+```css
+--color-background: #0b131d (deep navy)
+--color-surface: #111b29 (dark blue-gray)
+--color-accent: #ffb400 (gold)
+--color-accent-dark: #f49500
+--color-text: #f4f7fb (off-white)
+--color-text-muted: #b8c4d7 (soft gray)
+--color-border: rgba(255, 255, 255, 0.08)
+```
+
+### Typography
+
+- **Font Family**: Inter (system fallbacks: -apple-system, BlinkMacSystemFont, sans-serif)
+- **Line Height**: 1.6 (body), 1.1–1.2 (headings)
+- **Weights**: 400 (normal), 600 (semi-bold), 700 (bold)
+- **Heading Sizes**: Responsive using `clamp()`
+  - H1: clamp(1.8rem, 5vw, 3rem)
+  - H2: clamp(1.6rem, 4vw, 2.5rem)
+
+### Spacing & Shadows
+
+```css
+--radius-lg: 20px
+--radius-md: 14px
+--radius-sm: 10px
+--shadow-soft: 0 26px 54px -26px rgba(15, 24, 35, 0.72)
+--shadow-card: 0 22px 44px -28px rgba(0, 0, 0, 0.7)
+--transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1)
+```
+
+## SEO & Metadata
+
+- **Title & Description**: Optimized for "katalizatorių supirkimas" + geo-terms
+- **Keywords**: Includes city names (Vilnius, Kaunas, Panevėžys, etc.)
+- **Open Graph**: og:title, og:description, og:image (logotipas.png)
+- **Twitter Card**: summary_large_image
+- **Canonical**: https://katalizatoriu-supirkimas.lt/
+- **Robots Meta**: index, follow, max-snippet:-1, max-image-preview:large
+- **Structured Data**: JSON-LD for FAQPage and AutomotiveBusiness schema
+
+### Critical Fix Applied
+
+- Removed emoji (✅) from meta description (was causing encoding issues)
+- Added proper lang="lt" with Lithuanian locale in OG tags
+
+## JavaScript Patterns
+
+### Header Scroll Behavior
+
+```javascript
+// Sticky header compact/hidden states
+- Compact: padding reduced at 120px scroll
+- Hidden: transform translateY(-100%) at 200px scroll
+- Passive scroll listener for performance
+```
+
+### Tawk Chat Integration
+
+```javascript
+// Deferred loading (3s timeout)
+// Custom branding: replaces chat bubble icon with logotipas.png
+// Callback chains: onLoad, onChatMaximized, onChatMinimized
+```
+
+### Dynamic Year in Footer
+
+```javascript
+document.getElementById('year').textContent = new Date().getFullYear()
+```
+
+## Common Maintenance Tasks
+
+### Updating Contact Information
+
+1. **Phone Links**: `href="tel:+37063655055"` (appears in 4 places: header, hero CTA, sticky bar, floating buttons)
+2. **WhatsApp**: `href="https://wa.me/37063655055"`
+3. **Viber**: `href="viber://contact?number=%2B37063655055"`
+
+Update all three in:
+- Header contact links
+- Hero CTA buttons
+- Sticky CTA bar (mobile)
+- Floating contact buttons
+
+### Updating Pricing Table
+
+Edit `.pricing-row` divs in `#pricing` section. Row structure:
+```html
+<div class="pricing-row" role="row">
+  <div class="pricing-cell">Type</div>
+  <div class="pricing-cell">Price</div>
+  <div class="pricing-cell">Note</div>
+</div>
+```
+
+### Adding/Removing Cities
+
+Edit `.cities` list in `#locations`. Displays as:
+- Mobile: 1 column
+- Tablet: 2 columns
+- Desktop: 5 columns
+
+### Adding New Guide Article
+
+1. Create `<article id="straipsnis-NEW" class="guide-article">`
+2. Add `<h2 id="straipsnis-NEW-title">` with title
+3. Add footer link: `<a href="#straipsnis-NEW">`
+4. Use `.guide-article__subheading` for subsections
+5. Use `.guide-table-wrapper` + `.guide-table` for data tables
+
+## Performance & Accessibility
+
+### Optimizations Applied
+
+- CSS custom properties for theming (single source of truth)
+- No runtime compilation; pure CSS Grid/Flexbox
+- Image lazy loading: `loading="lazy"` + `decoding="async"`
+- WebP with PNG fallback via `<picture>`
+- Sticky positioning for header (GPU-accelerated)
+- Minimal JavaScript (scroll detection, chat integration)
+
+### Accessibility Enhancements
+
+- Semantic HTML: `<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<footer>`
+- ARIA labels on all major sections (`aria-label`, `aria-labelledby`)
+- Focus states: `outline: 2px solid rgba(255, 180, 0, 0.5)` on buttons
+- Keyboard navigation: all links and buttons are focusable
+- Color contrast: text meets WCAG AA standards (off-white on dark)
+- Details/Summary for FAQ (native browser expand/collapse)
+
+## Development Workflow
+
+### Adding a New Component
+
+1. **HTML**: Add semantic section with ID and aria labels
+2. **CSS**: Create mobile-first base styles, then @media queries for larger breakpoints
+3. **Responsive**: Test at 375px (mobile), 768px (tablet), 1024px+ (desktop)
+4. **Focus**: Ensure focus-visible states on interactive elements
+
+### Testing Checklist
+
+- [ ] Mobile (<640px): No horizontal scroll, buttons don't overlap
+- [ ] Tablet (640–960px): 2-column grids display correctly
+- [ ] Desktop (960px+): Full 4-column grids, hero image visible
+- [ ] Sticky header: Compact at 120px, hidden at 200px
+- [ ] Floating buttons: No overlap with sticky CTA on mobile
+- [ ] Contact buttons: All three (phone, WhatsApp, Viber) functional
+- [ ] Forms/CTAs: Links use tel:, https://wa.me/, viber:// protocols
+- [ ] Images: Load with correct srcset, alt text present
+- [ ] Links: All internal anchors (#hero, #process, etc.) work
+- [ ] SEO: Meta tags, structured data, canonical URL correct
+
+## Notes & Gotchas
+
+1. **Hero Highlight (Price Ticker)** is hidden on mobile (<640px) with `display: none` to preserve viewport space.
+2. **Sticky CTA Bar** only appears on mobile; floats above footer with bottom: 0. Disappears on desktop.
+3. **Floating Contact Buttons** positioned slightly above sticky CTA to avoid overlap.
+4. **Color Theme**: Gold (#ffb400) is reserved for accents, hover states, and CTAs. Never use for body text.
+5. **Font Loading**: Google Fonts with `display=swap` ensures text renders while fonts load.
+6. **Tawk Chat**: Integrated via deferred script injection. Custom branding replaces default bubble.
+7. **Lithuanian Language**: Content is 100% Lithuanian. Ensure all updates maintain this.
+
+---
+
+**Last Updated**: December 1, 2025  
+**Maintained By**: Mariukasfak (GitHub owner)
