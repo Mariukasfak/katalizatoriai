@@ -513,6 +513,29 @@
   </script>
   <script>
     (function() {
+      const stickyCta = document.querySelector('.sticky-cta');
+      if (!stickyCta) return;
+      let lastScrollY = window.scrollY;
+      
+      const handleStickyCta = () => {
+        const current = window.scrollY;
+        const isScrollingDown = current > lastScrollY;
+        const scrollThreshold = 300;
+        
+        if (current > scrollThreshold && isScrollingDown) {
+          stickyCta.classList.add('sticky-cta--hidden');
+        } else {
+          stickyCta.classList.remove('sticky-cta--hidden');
+        }
+        lastScrollY = current;
+      };
+      
+      window.addEventListener('scroll', handleStickyCta, { passive: true });
+      handleStickyCta();
+    })();
+  </script>
+  <script>
+    (function() {
       const TAWK_SRC = 'https://embed.tawk.to/68d2a63a689fd01926387f8a/1j5rdilgu';
       let injected = false;
 

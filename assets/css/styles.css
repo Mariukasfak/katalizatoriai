@@ -1311,6 +1311,13 @@ small {
   z-index: 130;
   gap: 8px;
   min-height: auto;
+  transform: translateY(0);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sticky-cta--hidden {
+  transform: translateY(120px);
+  pointer-events: none;
 }
 
 @media (min-width: 640px) {
