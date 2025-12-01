@@ -1267,50 +1267,31 @@ small {
 }
 
 .floating-contact {
-  position: fixed;
-  right: 16px;
-  bottom: calc(88px + 16px);
-  z-index: 120;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  display: none !important;
 }
 
 @media (min-width: 640px) {
   .floating-contact {
-    right: 24px;
-    bottom: 24px;
+    display: none !important;
   }
 
   .floating-contact__btn {
-    width: 56px;
-    height: 56px;
+    display: none !important;
   }
 }
 
 @media (max-width: 640px) {
   .floating-contact {
-    right: 16px;
-    bottom: calc(80px + 16px);
+    display: none !important;
   }
 
   .floating-contact__btn {
-    width: 48px;
-    height: 48px;
-    font-size: 1.2rem;
+    display: none !important;
   }
 }
 
 .floating-contact__btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  cursor: pointer;
-  border: none;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  line-height: 1;
+  display: none !important;
 }
 
 
@@ -1323,11 +1304,13 @@ small {
   border-top: 1px solid var(--color-border);
   padding: 10px 12px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   box-shadow: 0 -14px 34px -18px rgba(0, 0, 0, 0.65);
   z-index: 130;
   gap: 8px;
-  min-height: 60px;
+  min-height: auto;
 }
 
 @media (min-width: 640px) {
@@ -1347,6 +1330,7 @@ small {
   gap: 8px;
   width: 100%;
   max-width: var(--max-width);
+  flex-wrap: wrap;
 }
 
 .sticky-cta__link {
@@ -1386,6 +1370,37 @@ small {
 .sticky-cta__link--secondary:active {
   transform: translateY(1px);
   background: rgba(255, 255, 255, 0.15);
+}
+
+.language-selector {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.language-link {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-decoration: none;
+  transition: all var(--transition);
+  cursor: pointer;
+}
+
+.language-link:hover,
+.language-link:focus {
+  color: var(--color-text);
+  background: rgba(255, 180, 0, 0.1);
+  border-color: var(--color-accent);
+}
+
+.language-link--active {
+  color: #151515;
+  background: linear-gradient(135deg, var(--color-accent), #ffd166);
+  border-color: var(--color-accent);
 }
 
 
